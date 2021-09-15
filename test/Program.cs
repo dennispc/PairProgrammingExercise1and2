@@ -13,42 +13,18 @@ namespace test
 
             int[] sortArray2 = new int[] { 14, 1234, 1231234, 12312314 };
 
-            Sorter sorter = new Sorter();
+            IMerger merger = new RecusiveMerger();
             
-            int[] mergedArray = sorter.MergeSortedArray(sortArray1,sortArray1);
+            int[] mergedArray = merger.MergeSortedArrays(sortArray1,sortArray1);
+
+            IMajorityChecker majorityChecker = new MyMajorityChecker();
 
             foreach (var i in mergedArray)
             {
                 Console.WriteLine(i);
             }
             
-            Console.WriteLine(HasMajority(majorityArray));
-        }
-
-        static bool HasMajority(int[] majorityArray)
-        {
-
-            List<ValueCountPair> vcList = new List<ValueCountPair>();
-            for (int i = majorityArray.GetLength(0) - 1; i >= 0; i--)
-            {
-                int currentValue = majorityArray[i];
-                ValueCountPair vcp = vcList.Find(vc => vc.value == currentValue);
-                if (vcp == null)
-                    vcList.Add(new ValueCountPair(currentValue));
-                else
-                {
-                    vcp.Add(1);
-                    if(vcp.count>majorityArray.Length/2)
-                        return true;
-                }
-            }
-            int max = 0;
-            foreach (var vcp in vcList)
-            {
-                if (vcp.count > max)
-                    max = vcp.count;
-            }
-            return max > majorityArray.Length / 2;
+            Console.WriteLine(majorityChecker.HasMajority(majorityArray));
         }
     }
 }

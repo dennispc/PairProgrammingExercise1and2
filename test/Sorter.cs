@@ -1,12 +1,12 @@
 namespace test
 {
-    public class Sorter
+    public class Merger : IMerger
     {
-        public Sorter()
+        public Merger() 
         {
         }
 
-        public int[] MergeSortedArray(int[] a, int[] b)
+        public int[] MergeSortedArrays(int[] a, int[] b)
         {
             int indexA = 0;
             int indexB = 0;
